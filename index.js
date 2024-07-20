@@ -14,6 +14,15 @@ memeModalCloseBtn.addEventListener('click', closeModal)
 
 getImageBtn.addEventListener('click', renderCat)
 
+// This is one way to do it... we use the "capture" phase in order to
+// not interfere with clicking the Get Image button.  There are other
+// ways to do this...
+document.addEventListener('click', function(e) {
+  if(!e.target.closest('.meme-modal') && e.target !== getImageBtn) {
+      closeModal();
+  }
+});
+
 function highlightCheckedOption(e){
     const radios = document.getElementsByClassName('radio')
     for (let radio of radios){
