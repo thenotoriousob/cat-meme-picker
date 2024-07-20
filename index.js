@@ -4,6 +4,7 @@ const emotionRadios = document.getElementById('emotion-radios')
 const getImageBtn = document.getElementById('get-image-btn')
 const gifsOnlyOption = document.getElementById('gifs-only-option')
 const allCatsOption = document.getElementById('show-all-cats')
+const randomMeme = document.getElementById('random-meme')
 const memeModalInner = document.getElementById('meme-modal-inner')
 const memeModal = document.getElementById('meme-modal')
 const memeModalCloseBtn = document.getElementById('meme-modal-close-btn')
@@ -57,17 +58,25 @@ function renderCat(){
 function getCatArray(){
     const catsArray = getMatchingCatsArray()
     const isAllCats = allCatsOption.checked
+    const isRandomMeme = randomMeme.checked
+    let randomNumber = 0
+
+    if (isRandomMeme) {
+      randomNumber = Math.floor(Math.random() * catsData.length)
+      return [catsData[randomNumber]]
+    }
 
     if (isAllCats) {
         return catsArray
     }
-    else if(catsArray.length === 1){
+
+    if(catsArray.length === 1){
         return [catsArray[0]]
     }
-    else{
-        const randomNumber = Math.floor(Math.random() * catsArray.length)
-        return [catsArray[randomNumber]]
-    }
+
+
+    randomNumber = Math.floor(Math.random() * catsArray.length)
+    return [catsArray[randomNumber]]
 }
 
 function getMatchingCatsArray(){     
